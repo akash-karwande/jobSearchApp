@@ -1,0 +1,29 @@
+<div class="container">
+	<form>
+		<div class="form-group">
+			<input class="form-control" type="text" name="name" [(ngModel)]="jobFilter.experience" placeholder="Search by Experience"/>
+			<input class="form-control" type="text" name="name" [(ngModel)]="jobFilter.skills" placeholder="Search by Skills"/>
+			<input class="form-control" type="text" name="name" [(ngModel)]="jobFilter.location" placeholder="Search by Location"/>
+		</div>
+	</form>
+</div>
+
+<div class="container" *ngFor="let job of jobs?.jobsfeed | filterBy: jobFilter">
+	<div class="card col-md-7">
+		  <div class="card-header">
+		  	<h2 class="card-title">Profile:- {{job.title}}</h2>
+		  </div>
+		  <div class="card-body">
+		    <h4 *ngIf="job.skills">Required Skills :- {{job.skills}}</h4>
+		    <p class="card-text" *ngIf="job.jd">Description :- {{job.jd}}</p>
+		    <strong *ngIf="job.location">Location:- {{job.location}}</strong>
+		    <strong *ngIf="job.experience">experience:- {{job.experience}}</strong>
+		    <a href="{{job.applylink}}" target="_blank" class="btn btn-primary pull-right">Apply</a>
+		  </div>
+		</div>
+		
+</div>
+
+<div class="container" *ngIf="(jobs?.jobsfeed | filterBy: jobFilter)?.length === 0">
+      <h2 style="color: #fff;">No matching job found</h2>
+</div>
